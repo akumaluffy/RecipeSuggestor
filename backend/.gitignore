@@ -1,0 +1,16 @@
+# Virtual Environments
+.venv/
+.venv/
+.pdm-python
+
+# PDM packages
+__pypackages__/
+
+# Python
+app/__pycache__/
+app/*.py[cod]
+app/*.pyo
+app/*.pyd
+
+# DS Store
+.DS_Store
