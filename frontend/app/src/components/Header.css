@@ -1,0 +1,23 @@
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+  
+.header-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+  
+.header-title {
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: #111827;
+}
+  
+.header-subtitle {
+    color: #4b5563;
+    font-size: 1.125rem;
+}

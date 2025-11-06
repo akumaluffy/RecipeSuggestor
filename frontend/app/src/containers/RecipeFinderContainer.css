@@ -1,0 +1,38 @@
+.recipe-finder-main-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  @media (min-width: 1024px) {
+    .recipe-finder-main-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .recipe-finder-inputs-section {
+    grid-column: span 1;
+  }
+  
+  @media (min-width: 1024px) {
+    .recipe-finder-inputs-section {
+      grid-column: span 2;
+    }
+  }
+  
+  .recipe-finder-inputs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .recipe-finder-inputs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .recipe-finder-ingredients-section {
+    grid-column: span 1;
+  }
