@@ -39,7 +39,7 @@ export const InputForm: React.FC<InputFormProps> = ({
           onClick={() => onAdd(category)}
           className="input-form-button"
         >
-          Add
+        Add
         </button>
       </div>
     </div>

@@ -5,9 +5,9 @@ export const CATEGORY_LABELS = {
     sauce: 'Sauces'
   } as const;
   
-  export const CATEGORY_COLORS = {
+export const CATEGORY_COLORS = {
     protein: 'category-tag-protein',
     vegetable: 'category-tag-vegetable',
     spice: 'category-tag-spice',
     sauce: 'category-tag-sauce'
-  } as const;
+} as const;

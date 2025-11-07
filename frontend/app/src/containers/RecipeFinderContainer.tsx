@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { Ingredient, Recipe, InputsState, CategoryType } from '../types';
 import { InputForm } from '../components/InputForm';
 import { IngredientsList } from '../components/IngredientsList';
 import { RecipesDisplay } from '../components/RecipeDisplay.tsx';
 import './RecipeFinderContainer.css';
 
-export const RecipeFinderContainer: React.FC = () => {
+export const RecipeFinderContainer = () => {
   const [inputs, setInputs] = useState<InputsState>({
     protein: '',
     vegetable: '',
@@ -109,8 +109,8 @@ export const RecipeFinderContainer: React.FC = () => {
             ))}
           </div>
         </div>
-
-        <div className="recipe-finder-ingredients-section">
+      </div>
+      <div className="recipe-finder-ingredients-section">
           <IngredientsList
             ingredients={ingredientsList}
             selectedIngredient={selectedIngredient}
@@ -119,7 +119,6 @@ export const RecipeFinderContainer: React.FC = () => {
             onRemove={handleRemove}
             onSubmit={handleSubmit}
           />
-        </div>
       </div>
 
       <RecipesDisplay recipes={recipes} />

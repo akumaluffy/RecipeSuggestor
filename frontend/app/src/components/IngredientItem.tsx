@@ -21,7 +21,7 @@ export const IngredientItem: React.FC<IngredientItemProps> = ({
       <div className="ingredient-item-content">
         <span className="ingredient-item-name">{ingredient.name}</span>
         <span className={`ingredient-item-tag ${CATEGORY_COLORS[ingredient.category]}`}>
-          {CATEGORY_LABELS[ingredient.category]}
+        {CATEGORY_LABELS[ingredient.category]}
         </span>
       </div>
     </div>
