@@ -3,13 +3,14 @@ import type { Ingredient } from '../types';
 import { IngredientItem } from './IngredientItem';
 import './IngredientsList.css';
 
+// Props for ingredients list
 interface IngredientsListProps {
-  ingredients: Ingredient[];
-  selectedIngredient: string | null;
-  isLoading: boolean;
-  onSelectIngredient: (id: string) => void;
-  onRemove: () => void;
-  onSubmit: () => void;
+  ingredients: Ingredient[]; // list of ingredient components
+  selectedIngredient: string | null; // string of selected ingredient
+  isLoading: boolean; // recipe loading state
+  onSelectIngredient: (id: string) => void; // property function for handling user ingredient select
+  onRemove: () => void; // button fx for removing
+  onSubmit: () => void; // 
 }
 
 export const IngredientsList: React.FC<IngredientsListProps> = 
@@ -18,13 +19,13 @@ export const IngredientsList: React.FC<IngredientsListProps> =
     <div className="ingredients-list-container">
       <h2 className="ingredients-list-title">Your Ingredients</h2>
       
-      {/* Change container and class depending on if ingredients have been added */}
+      {/* change container and class depending on if ingredients have been added */}
       {ingredients.length === 0 ? 
 
-      // Empty ingredients list
+      // empty ingredients list
       ( <p className="ingredients-list-empty">No ingredients added yet</p>) : 
       (
-      // Ingredients in list
+      // ingredients in list
         <>
           <div className="ingredients-list-items">
             {ingredients.map(ingredient => 
@@ -32,31 +33,23 @@ export const IngredientsList: React.FC<IngredientsListProps> =
               isSelected={selectedIngredient === ingredient.id} onSelect={onSelectIngredient}/>))}
           </div>
 
+          {/* handle submit, disable submit button if loading */}
           <div className="ingredients-list-actions">
-            <button
-              onClick={onSubmit}
-              disabled={isLoading}
-              className="ingredients-list-button ingredients-list-button-primary"
-            >
-              {isLoading ? (
-                <>
-                  Finding Recipes...
-                </>
-              ) : (
-                'Find Recipes'
-              )}
+            <button onClick={onSubmit} disabled={isLoading} className="ingredients-list-button ingredients-list-button-primary">
+              {/* Finding recipes if button clicked, else name button "Find Recipes" */}
+              {isLoading ? (<>Finding Recipes...</>) : 
+              ('Find Recipes')}
             </button>
             
-            <button
-              onClick={onRemove}
-              disabled={!selectedIngredient}
-              className="ingredients-list-button ingredients-list-button-secondary"
-            >
+            {/* remove button to remove ingredients from list, disable button if ingredient not selected */}
+            <button onClick={onRemove} disabled={!selectedIngredient}
+            className="ingredients-list-button ingredients-list-button-secondary">
               Remove Selected
             </button>
           </div>
         </>
-      )}
+      )
+      }
     </div>
   );
 };

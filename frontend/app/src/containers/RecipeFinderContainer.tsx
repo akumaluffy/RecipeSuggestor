@@ -1,37 +1,31 @@
 import { useState } from 'react';
-import type { Ingredient, Recipe, InputsState, CategoryType } from '../types';
+import type { Ingredient, Recipe } from '../types';
 import { InputForm } from '../components/InputForm';
 import { IngredientsList } from '../components/IngredientsList';
 import { RecipesDisplay } from '../components/RecipeDisplay.tsx';
 import './RecipeFinderContainer.css';
 
 export const RecipeFinderContainer = () => {
-  const [inputs, setInputs] = useState<InputsState>({
-    protein: '',
-    vegetable: '',
-    spice: '',
-    sauce: ''
-  });
+  const [inputValue, setInputValue] = useState<string>('');
   
   const [ingredientsList, setIngredientsList] = useState<Ingredient[]>([]);
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleInputChange = (category: CategoryType, value: string) => {
-    setInputs(prev => ({ ...prev, [category]: value }));
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
   };
 
-  const handleAdd = (category: CategoryType) => {
-    const value = inputs[category].trim();
+  const handleAdd = () => {
+    const value = inputValue.trim();
     if (value) {
       const newIngredient: Ingredient = {
-        id: `${category}-${Date.now()}`,
+        id: `ingredient-${Date.now()}`,
         name: value,
-        category
       };
       setIngredientsList(prev => [...prev, newIngredient]);
-      setInputs(prev => ({ ...prev, [category]: '' }));
+      setInputValue('');
     }
   };
 
@@ -97,17 +91,11 @@ export const RecipeFinderContainer = () => {
     <>
       <div className="recipe-finder-main-grid">
         <div className="recipe-finder-inputs-section">
-          <div className="recipe-finder-inputs-grid">
-            {(Object.keys(inputs) as CategoryType[]).map(category => (
-              <InputForm
-                key={category}
-                category={category}
-                value={inputs[category]}
-                onChange={handleInputChange}
-                onAdd={handleAdd}
-              />
-            ))}
-          </div>
+            <InputForm
+              value={inputValue}
+              onChange={handleInputChange}
+              onAdd={handleAdd}
+            />
         </div>
       </div>
       <div className="recipe-finder-ingredients-section">

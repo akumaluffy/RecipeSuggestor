@@ -5,36 +5,15 @@
   margin-bottom: 2rem;
 }
 
-
-@media (min-width: 1024px) {
-  .recipe-finder-main-grid {
-    grid-template-columns: repeat(2, 1fr); /* increase columns to 2 for larger screens */
-  }
-}
-
 .recipe-finder-inputs-section {
-  grid-column: span 1; /* grid for */
+  grid-column: span 1;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d1d5db;
+  padding: 1.5rem;
 }
 
-  
-@media (min-width: 1024px) {
-  .recipe-finder-inputs-section {
-    grid-column: span 2;
-  }
-}
-  
-.recipe-finder-inputs-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-  
-@media (min-width: 768px) {
-  .recipe-finder-inputs-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-  
 .recipe-finder-ingredients-section {
   grid-column: span 1;
 }

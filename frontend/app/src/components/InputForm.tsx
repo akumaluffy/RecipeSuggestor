@@ -1,42 +1,36 @@
-import type { CategoryType } from '../types';
-import { CATEGORY_LABELS } from '../constants/categories.ts';
 import './InputForm.css';
 
 interface InputFormProps {
-  category: CategoryType;
   value: string;
-  onChange: (category: CategoryType, value: string) => void;
-  onAdd: (category: CategoryType) => void;
+  onChange: (value: string) => void;
+  onAdd: () => void;
 }
 
 export const InputForm: React.FC<InputFormProps> = ({
-  category,
   value,
   onChange,
   onAdd
 }) => {
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      onAdd(category);
+      onAdd();
     }
   };
 
   return (
     <div className="input-form-container">
-      <label className="input-form-label">
-        {CATEGORY_LABELS[category]}
-      </label>
+      <label className="input-form-label"></label>
       <div className="input-form-controls">
         <input
           type="text"
           value={value}
-          onChange={(e) => onChange(category, e.target.value)}
+          onChange={(e) => onChange(e.target.value)}
           onKeyPress={handleKeyPress}
-          placeholder={`Enter a ${category}...`}
+          placeholder={`Enter an ingredient...`}
           className="input-form-field"
         />
         <button
-          onClick={() => onAdd(category)}
+          onClick={() => onAdd()}
           className="input-form-button"
         >
         Add
