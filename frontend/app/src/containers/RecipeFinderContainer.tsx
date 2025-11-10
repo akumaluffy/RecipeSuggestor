@@ -36,6 +36,10 @@ export const RecipeFinderContainer = () => {
     }
   };
 
+  const handleSelectIngredient = (id: string) => {
+    setSelectedIngredient(prev => prev === id ? null : id);
+  };
+
   const handleSubmit = async () => {
     if (ingredientsList.length === 0) return;
     
@@ -103,7 +107,7 @@ export const RecipeFinderContainer = () => {
             ingredients={ingredientsList}
             selectedIngredient={selectedIngredient}
             isLoading={isLoading}
-            onSelectIngredient={setSelectedIngredient}
+            onSelectIngredient={handleSelectIngredient}
             onRemove={handleRemove}
             onSubmit={handleSubmit}
           />

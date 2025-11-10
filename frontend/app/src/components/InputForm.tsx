@@ -19,7 +19,7 @@ export const InputForm: React.FC<InputFormProps> = ({
 
   return (
     <div className="input-form-container">
-      <label className="input-form-label"></label>
+      <h2 className="input-form-title">Ingredient Form</h2>
       <div className="input-form-controls">
         <input
           type="text"
