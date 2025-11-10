@@ -12,31 +12,24 @@ interface IngredientsListProps {
   onSubmit: () => void;
 }
 
-export const IngredientsList: React.FC<IngredientsListProps> = ({
-  ingredients,
-  selectedIngredient,
-  isLoading,
-  onSelectIngredient,
-  onRemove,
-  onSubmit
-}) => {
+export const IngredientsList: React.FC<IngredientsListProps> = 
+  ({ ingredients, selectedIngredient, isLoading, onSelectIngredient, onRemove, onSubmit }) => {
   return (
     <div className="ingredients-list-container">
       <h2 className="ingredients-list-title">Your Ingredients</h2>
       
-      {ingredients.length === 0 ? (
-        <p className="ingredients-list-empty">No ingredients added yet</p>
-      ) : (
+      {/* Change container and class depending on if ingredients have been added */}
+      {ingredients.length === 0 ? 
+
+      // Empty ingredients list
+      ( <p className="ingredients-list-empty">No ingredients added yet</p>) : 
+      (
+      // Ingredients in list
         <>
           <div className="ingredients-list-items">
-            {ingredients.map(ingredient => (
-              <IngredientItem
-                key={ingredient.id}
-                ingredient={ingredient}
-                isSelected={selectedIngredient === ingredient.id}
-                onSelect={onSelectIngredient}
-              />
-            ))}
+            {ingredients.map(ingredient => 
+            (<IngredientItem key={ingredient.id} ingredient={ingredient} 
+              isSelected={selectedIngredient === ingredient.id} onSelect={onSelectIngredient}/>))}
           </div>
 
           <div className="ingredients-list-actions">

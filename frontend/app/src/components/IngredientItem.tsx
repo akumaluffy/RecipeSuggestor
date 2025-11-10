@@ -1,28 +1,28 @@
 import type { Ingredient } from '../types';
-import { CATEGORY_LABELS, CATEGORY_COLORS } from '../constants/categories.ts';
 import './IngredientItem.css';
 
+// Props for each ingredient item
 interface IngredientItemProps {
-  ingredient: Ingredient;
-  isSelected: boolean;
-  onSelect: (id: string) => void;
+  ingredient: Ingredient; // ingredient item
+  isSelected: boolean; // did user select item
+  onSelect: (id: string) => void; // property function for handling user item selection
 }
 
-export const IngredientItem: React.FC<IngredientItemProps> = ({
-  ingredient,
-  isSelected,
-  onSelect
-}) => {
+/**
+ * 
+ * @param ingredient - ingredient type
+ * @param isSelected - boolean representing item selection by user
+ * @param onSelect - property function for handling user item selection
+ */
+export const IngredientItem: React.FC<IngredientItemProps> = 
+  ({ ingredient, isSelected, onSelect }) => {
   return (
+    // change class name if item selected to enable different css effects
     <div
-      onClick={() => onSelect(ingredient.id)}
-      className={`ingredient-item ${isSelected ? 'selected' : ''}`}
-    >
+      onClick= {() => onSelect(ingredient.id)}
+      className= {`ingredient-item ${isSelected ? 'selected' : ''}`}>
       <div className="ingredient-item-content">
         <span className="ingredient-item-name">{ingredient.name}</span>
-        <span className={`ingredient-item-tag ${CATEGORY_COLORS[ingredient.category]}`}>
-        {CATEGORY_LABELS[ingredient.category]}
-        </span>
       </div>
     </div>
   );

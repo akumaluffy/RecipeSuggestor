@@ -1,10 +1,15 @@
 import type { Recipe } from '../types';
 import './RecipeCard.css';
 
+// Props for each recipe card
 interface RecipeCardProps {
   recipe: Recipe;
 }
 
+/**
+ * Card / container for each recipe including recipe name, description, ingredients, and instructions
+ * @param recipe - recipe type containing all information pertaining to a recipe
+ */
 export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
   return (
     <div className="recipe-card">
@@ -14,6 +19,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
       <div className="recipe-card-section">
         <h4 className="recipe-card-section-title">Ingredients:</h4>
         <div className="recipe-card-ingredients">
+          {/* map ingredients list used by recipe */}
           {recipe.ingredients.map((ing, i) => (
             <span key={i} className="recipe-card-ingredient-tag">
               {ing}
@@ -25,6 +31,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
       <div className="recipe-card-section">
         <h4 className="recipe-card-section-title">Instructions:</h4>
         <ol className="recipe-card-instructions">
+          {/* maps recipe instructions as a list element */}
           {recipe.instructions.map((step, i) => (
             <li key={i} className="recipe-card-instruction">{step}</li>
           ))}
