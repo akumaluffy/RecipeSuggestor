@@ -93,14 +93,12 @@ export const RecipeFinderContainer = () => {
 
   return (
     <>
-      <div className="recipe-finder-main-grid">
-        <div className="recipe-finder-inputs-section">
-            <InputForm
-              value={inputValue}
-              onChange={handleInputChange}
-              onAdd={handleAdd}
-            />
-        </div>
+      <div className="recipe-finder-inputs-section">
+          <InputForm
+            value={inputValue}
+            onChange={handleInputChange}
+            onAdd={handleAdd}
+          />
       </div>
       <div className="recipe-finder-ingredients-section">
           <IngredientsList
