@@ -1,31 +1,31 @@
-  .ingredient-item {
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    border: 2px solid #d1d5db;
-    cursor: pointer; /* change cursor to hand if hovering */
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    transition: all 0.2s;
-  }
-  
-  .ingredient-item:hover {
-    border-color: #9ca3af;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  }
-  
-  .ingredient-item.selected {
-    background-color: #f3f4f6;
-    border-color: #16a34a;
-    color: #111827;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  }
-  
-  .ingredient-item-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .ingredient-item-name {
-    color: #111827;
-    font-weight: 500;
-  }
+.ingredient-item {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 2px solid #d1d5db;
+  cursor: pointer; /* change cursor to hand if hovering */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.2s;
+}
+
+.ingredient-item:hover {
+  border-color: #9ca3af;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+.ingredient-item.selected {
+  background-color: #f3f4f6;
+  border-color: #16a34a;
+  color: #111827;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+.ingredient-item-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ingredient-item-name {
+  color: #111827;
+  font-weight: 500;
+}

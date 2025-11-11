@@ -11,6 +11,7 @@ export const InputForm: React.FC<InputFormProps> = ({
   onChange,
   onAdd
 }) => {
+  // handles user pressing enter
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       onAdd();

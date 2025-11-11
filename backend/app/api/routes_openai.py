@@ -4,9 +4,11 @@ from pydantic import BaseModel
 from typing import List
 import json
 
+# structure of each request object, ensures request includes list of ingredients
 class RecipeRequest(BaseModel):
     ingredients: List[str]
 
+# structure of each recipe object returned by endpoint
 class RecipeResponse(BaseModel):
     name: str
     description: str
@@ -15,6 +17,9 @@ class RecipeResponse(BaseModel):
 
 router = APIRouter()
 
+'''
+
+'''
 @router.post("/generate_text", response_model=List[RecipeResponse])
 async def generate_text(request: RecipeRequest):
     prompt = f"""I need recipe ideas using the ingredients that I currently have on hand. Could you give me 4 recipe suggestions using the following ingredients: {', '.join(request.ingredients)}?
@@ -25,14 +30,13 @@ async def generate_text(request: RecipeRequest):
     - ingredients: array of strings
     - instructions: array of strings
     
-    Return only valid JSON, no other text, and do not wrap the JSON response in markdown code blocks"""
+    Return only valid JSON, no other text, and do not wrap the JSON response in markdown code blocks."""
 
     try:
         response = await get_openai_response(prompt)
         response = response.strip()
 
         recipes_data = json.loads(response)
-        # Validate/parse each item as a RecipeResponse instance
         recipes = [RecipeResponse(**recipe) for recipe in recipes_data]
         return recipes
     except json.JSONDecodeError as e:

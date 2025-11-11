@@ -3,14 +3,22 @@ import type { Ingredient } from '../types';
 import { IngredientItem } from './IngredientItem';
 import './IngredientsList.css';
 
-// Props for ingredients list
+/**
+ * Props for ingredients list component
+ * ingredients - list of ingredients in the list
+ * selectedIngredient - ingredient that has been selected
+ * isLoading - ingredients load state
+ * onSelectIngredient - property function for handling user ingredient select
+ * onRemove - button function for remove
+ * onSubmit - buttion function for submit
+ */
 interface IngredientsListProps {
-  ingredients: Ingredient[]; // list of ingredient components
-  selectedIngredient: string | null; // string of selected ingredient
-  isLoading: boolean; // recipe loading state
-  onSelectIngredient: (id: string) => void; // property function for handling user ingredient select
-  onRemove: () => void; // button fx for removing
-  onSubmit: () => void; // 
+  ingredients: Ingredient[];
+  selectedIngredient: string | null;
+  isLoading: boolean;
+  onSelectIngredient: (id: string) => void;
+  onRemove: () => void;
+  onSubmit: () => void; 
 }
 
 export const IngredientsList: React.FC<IngredientsListProps> = 
@@ -19,13 +27,12 @@ export const IngredientsList: React.FC<IngredientsListProps> =
     <div className="ingredients-list-container">
       <h2 className="ingredients-list-title">Your Ingredients</h2>
       
-      {/* change container and class depending on if ingredients have been added */}
+      {/* empty container if no ingredients, prevents user submission */}
       {ingredients.length === 0 ? 
-
-      // empty ingredients list
       ( <p className="ingredients-list-empty">No ingredients added yet</p>) : 
+
+      /* fill container with ingredients and buttons if list not empty */
       (
-      // ingredients in list
         <>
           <div className="ingredients-list-items">
             {ingredients.map(ingredient => 

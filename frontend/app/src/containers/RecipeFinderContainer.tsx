@@ -49,7 +49,7 @@ export const RecipeFinderContainer = () => {
     setError(null);
     
     try {
-      // Extract ingredient names and wrap them in a RecipeRequest object
+      // takes ingredient names and wraps in a RecipeRequest object for request
       const ingredientNames: string[] = ingredientsList.map(ing => ing.name);
       const request: RecipeRequest = { ingredients: ingredientNames };
       const recipesData: Recipe[] = await fetchRecipes(request);
@@ -89,6 +89,7 @@ export const RecipeFinderContainer = () => {
         </div>
       )}
 
+      {/* error message if api call fails */}
       {error && (
         <div className="error-message">
           <p> {error} </p>

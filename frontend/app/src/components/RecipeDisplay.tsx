@@ -11,11 +11,8 @@ interface RecipesDisplayProps {
  * Container for recipes, comprised of recipe cards
  * @param recipes - array of Recipe objects (types)
  */
-
 export const RecipesDisplay: React.FC<RecipesDisplayProps> = ({ recipes }) => {
   if (recipes.length === 0) return null; // Don't render display if no recipes have been suggested yet
-  {/** TODO: after submit button is pressed on ingredients list, make this container have a different view that shows waiting / error message 
-    from api call, maybe make this a new container + argument */}
 
   return (
     <div className="recipes-display-container">

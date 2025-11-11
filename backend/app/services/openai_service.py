@@ -18,7 +18,5 @@ async def get_openai_response(prompt: str) -> str:
             {"role": "user", "content": prompt}
         ]
     )
-
-    # The response content is in response.choices[0].message.content
     output_text = response.choices[0].message.content
     return output_text
