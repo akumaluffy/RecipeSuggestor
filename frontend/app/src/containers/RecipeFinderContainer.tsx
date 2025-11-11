@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import type { Ingredient, Recipe } from '../types';
+import type { Ingredient, Recipe, RecipeRequest } from '../types';
 import { InputForm } from '../components/InputForm';
 import { IngredientsList } from '../components/IngredientsList';
 import { RecipesDisplay } from '../components/RecipeDisplay.tsx';
+import { fetchRecipes } from '../services/api';
 import './RecipeFinderContainer.css';
 
 export const RecipeFinderContainer = () => {
@@ -12,6 +13,7 @@ export const RecipeFinderContainer = () => {
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -40,43 +42,69 @@ export const RecipeFinderContainer = () => {
     setSelectedIngredient(prev => prev === id ? null : id);
   };
 
+  // const handleSubmit = async () => {
+  //   if (ingredientsList.length === 0) return;
+    
+  //   setIsLoading(true);
+    
+  //   try {
+  //     // dummy data for find recipes to test
+  //     await new Promise(resolve => setTimeout(resolve, 1500));
+  //     setRecipes([
+  //       {
+  //         name: 'Mediterranean Delight',
+  //         description: 'A fresh and healthy dish combining your selected ingredients',
+  //         ingredients: ingredientsList.map(i => i.name),
+  //         instructions: [
+  //           'Prepare all ingredients by washing and chopping as needed',
+  //           'Heat a large pan over medium heat',
+  //           'Cook proteins until golden brown',
+  //           'Add vegetables and sauté until tender',
+  //           'Season with spices and finish with sauces',
+  //           'Serve hot and enjoy!'
+  //         ]
+  //       },
+  //       {
+  //         name: 'Quick Stir-Fry',
+  //         description: 'A fast and flavorful option using your ingredients',
+  //         ingredients: ingredientsList.map(i => i.name),
+  //         instructions: [
+  //           'Heat wok or large pan on high heat',
+  //           'Quickly cook proteins until done',
+  //           'Toss in vegetables and stir continuously',
+  //           'Add spices and sauces',
+  //           'Serve over rice or noodles'
+  //         ]
+  //       }
+  //     ]);
+  //   } catch (error) {
+  //     console.error('Error fetching recipes:', error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
   const handleSubmit = async () => {
     if (ingredientsList.length === 0) return;
     
     setIsLoading(true);
+    setError(null);
     
     try {
-      // dummy data for find recipes to test
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setRecipes([
-        {
-          name: 'Mediterranean Delight',
-          description: 'A fresh and healthy dish combining your selected ingredients',
-          ingredients: ingredientsList.map(i => i.name),
-          instructions: [
-            'Prepare all ingredients by washing and chopping as needed',
-            'Heat a large pan over medium heat',
-            'Cook proteins until golden brown',
-            'Add vegetables and sauté until tender',
-            'Season with spices and finish with sauces',
-            'Serve hot and enjoy!'
-          ]
-        },
-        {
-          name: 'Quick Stir-Fry',
-          description: 'A fast and flavorful option using your ingredients',
-          ingredients: ingredientsList.map(i => i.name),
-          instructions: [
-            'Heat wok or large pan on high heat',
-            'Quickly cook proteins until done',
-            'Toss in vegetables and stir continuously',
-            'Add spices and sauces',
-            'Serve over rice or noodles'
-          ]
-        }
-      ]);
+      // Extract ingredient names and wrap them in a RecipeRequest object
+      const ingredientNames: string[] = ingredientsList.map(ing => ing.name);
+      const request: RecipeRequest = { ingredients: ingredientNames };
+      const response = await fetchRecipes(request);
+      
+      // Parse the response (assuming backend returns JSON array)
+      // If backend returns string, you might need to parse it here
+      const recipesData: Recipe[] = typeof response === 'string' 
+        ? JSON.parse(response) 
+        : response;
+      
+      setRecipes(recipesData);
     } catch (error) {
       console.error('Error fetching recipes:', error);
+      setError(error instanceof Error ? error.message : 'Failed to fetch recipes');
     } finally {
       setIsLoading(false);
     }
@@ -102,7 +130,20 @@ export const RecipeFinderContainer = () => {
           />
       </div>
 
-      <RecipesDisplay recipes={recipes} />
+      {isLoading &&
+      (
+        <div className="loading-message">
+          <p>Finding recipes for you...</p>
+        </div>
+      )}
+
+      {error && (
+        <div className="error-message">
+          <p> {error} </p>
+        </div>
+      )}
+
+      {!isLoading && !error && <RecipesDisplay recipes={recipes} />}
     </>
   );
 };

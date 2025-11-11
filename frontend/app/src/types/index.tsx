@@ -9,3 +9,7 @@ export interface Recipe {
     ingredients: string[];
     instructions: string[]; // might need to change to just a string
 }
+
+export interface RecipeRequest {
+    ingredients: string[]
+}
