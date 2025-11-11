@@ -42,47 +42,6 @@ export const RecipeFinderContainer = () => {
     setSelectedIngredient(prev => prev === id ? null : id);
   };
 
-  // const handleSubmit = async () => {
-  //   if (ingredientsList.length === 0) return;
-    
-  //   setIsLoading(true);
-    
-  //   try {
-  //     // dummy data for find recipes to test
-  //     await new Promise(resolve => setTimeout(resolve, 1500));
-  //     setRecipes([
-  //       {
-  //         name: 'Mediterranean Delight',
-  //         description: 'A fresh and healthy dish combining your selected ingredients',
-  //         ingredients: ingredientsList.map(i => i.name),
-  //         instructions: [
-  //           'Prepare all ingredients by washing and chopping as needed',
-  //           'Heat a large pan over medium heat',
-  //           'Cook proteins until golden brown',
-  //           'Add vegetables and sauté until tender',
-  //           'Season with spices and finish with sauces',
-  //           'Serve hot and enjoy!'
-  //         ]
-  //       },
-  //       {
-  //         name: 'Quick Stir-Fry',
-  //         description: 'A fast and flavorful option using your ingredients',
-  //         ingredients: ingredientsList.map(i => i.name),
-  //         instructions: [
-  //           'Heat wok or large pan on high heat',
-  //           'Quickly cook proteins until done',
-  //           'Toss in vegetables and stir continuously',
-  //           'Add spices and sauces',
-  //           'Serve over rice or noodles'
-  //         ]
-  //       }
-  //     ]);
-  //   } catch (error) {
-  //     console.error('Error fetching recipes:', error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
   const handleSubmit = async () => {
     if (ingredientsList.length === 0) return;
     
@@ -93,13 +52,7 @@ export const RecipeFinderContainer = () => {
       // Extract ingredient names and wrap them in a RecipeRequest object
       const ingredientNames: string[] = ingredientsList.map(ing => ing.name);
       const request: RecipeRequest = { ingredients: ingredientNames };
-      const response = await fetchRecipes(request);
-      
-      // Parse the response (assuming backend returns JSON array)
-      // If backend returns string, you might need to parse it here
-      const recipesData: Recipe[] = typeof response === 'string' 
-        ? JSON.parse(response) 
-        : response;
+      const recipesData: Recipe[] = await fetchRecipes(request);
       
       setRecipes(recipesData);
     } catch (error) {
@@ -130,8 +83,7 @@ export const RecipeFinderContainer = () => {
           />
       </div>
 
-      {isLoading &&
-      (
+      {isLoading && (
         <div className="loading-message">
           <p>Finding recipes for you...</p>
         </div>

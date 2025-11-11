@@ -7,7 +7,7 @@ export interface Recipe {
     name: string;
     description: string;
     ingredients: string[];
-    instructions: string[]; // might need to change to just a string
+    instructions: string[];
 }
 
 export interface RecipeRequest {
