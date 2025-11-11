@@ -9,10 +9,3 @@ export interface Recipe {
     ingredients: string[];
     instructions: string[]; // might need to change to just a string
 }
-  
-export interface InputsState {
-    protein: string;
-    vegetable: string;
-    spice: string;
-    sauce: string;
-}

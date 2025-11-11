@@ -46,16 +46,7 @@ export const RecipeFinderContainer = () => {
     setIsLoading(true);
     
     try {
-      // Replace with actual FastAPI endpoint
-      // const response = await fetch('http://localhost:8000/api/recipes', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ ingredients: ingredientsList.map(i => i.name) })
-      // });
-      // const data = await response.json();
-      // setRecipes(data.recipes);
-      
-      // Mock data for demonstration
+      // dummy data for find recipes to test
       await new Promise(resolve => setTimeout(resolve, 1500));
       setRecipes([
         {

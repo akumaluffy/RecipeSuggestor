@@ -12,5 +12,8 @@ app/*.py[cod]
 app/*.pyo
 app/*.pyd
 
+# Environment variables
+.env
+
 # DS Store
 .DS_Store
