@@ -16,7 +16,7 @@ export const RecipesDisplay: React.FC<RecipesDisplayProps> = ({ recipes }) => {
 
   return (
     <div className="recipes-display-container">
-      <h2 className="recipes-display-title">Suggested Recipes</h2>
+      <h2 className="recipes-display-title"> Suggested Recipes </h2>
       <div className="recipes-display-grid">
         {/* maps each recipe item to a recipe card within recipe display*/}
         {recipes.map((recipe, index) => ( 

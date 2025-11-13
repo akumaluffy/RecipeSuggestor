@@ -1,0 +1,77 @@
+.favorites-card {
+  background-color: white;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.favorites-card:hover {
+  border-color: #16a34a;
+  box-shadow: 0 10px 20px -3px rgba(22, 163, 74, 0.2), 0 4px 6px -4px rgba(22, 163, 74, 0.1);
+  transform: translateY(-2px);
+}
+
+.favorites-card.selected {
+  border-color: #16a34a;
+  border-width: 2px;
+  background-color: #f0fdf4;
+  box-shadow: 0 10px 20px -3px rgba(22, 163, 74, 0.3), 0 4px 6px -4px rgba(22, 163, 74, 0.2);
+}
+
+.favorites-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.favorites-card-description {
+  color: #4b5563;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.favorites-card-section {
+  margin-bottom: 1rem;
+}
+
+.favorites-card-section:last-child {
+  margin-bottom: 0;
+}
+
+.favorites-card-section-title {
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.favorites-card-ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.favorites-card-ingredient-tag {
+  background-color: #ffedd5;
+  color: #9a3412;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+.favorites-card-instructions {
+  list-style-position: inside;
+  list-style-type: decimal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #374151;
+}
+
+.favorites-card-instruction {
+  font-size: 0.875rem;
+}

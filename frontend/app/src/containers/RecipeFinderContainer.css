@@ -1,22 +1,14 @@
-.recipe-finder-main-grid {
-  display: grid; /* grid for ingredient input sections */
-  grid-template-columns: 1fr;
-  gap: 2rem;
+.recipe-finder-favorites-section {
   margin-bottom: 2rem;
 }
 
-.recipe-finder-inputs-section {
+/* .recipe-finder-inputs-section {
   grid-column: span 1;
   background-color: white;
   border-radius: 0.75rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   border: 1px solid #d1d5db;
   margin-bottom: 2rem;
-}
-
-.recipe-finder-ingredients-section {
-  grid-column: span 1;
-}
+} */
 
 .loading-message {
   display: flex;
@@ -25,7 +17,7 @@
   justify-content: center;
   padding: 3rem 2rem;
   margin: 2rem 0;
-  background: linear-gradient(135deg, #38b2ac 0%, #5a67d8 100%);
+  background: linear-gradient(135deg, #38e091 0%, #229a6f 100%);
   border-radius: 0.75rem;
   box-shadow: 0 10px 25px -5px rgba(102, 126, 234, 0.3), 0 4px 6px -2px rgba(102, 126, 234, 0.2);
 }
@@ -40,6 +32,7 @@
   padding-left: 2.5rem;
 }
 
+/* loading animation */
 .loading-message p::before {
   content: '';
   position: absolute;
@@ -52,4 +45,26 @@
   border-top-color: white;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+.error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  margin: 2rem 0;
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d1d5db;
 }

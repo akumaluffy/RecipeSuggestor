@@ -36,8 +36,8 @@ export const IngredientsList: React.FC<IngredientsListProps> =
         <>
           <div className="ingredients-list-items">
             {ingredients.map(ingredient => 
-            (<IngredientItem key={ingredient.id} ingredient={ingredient} 
-              isSelected={selectedIngredient === ingredient.id} onSelect={onSelectIngredient}/>))}
+            (<IngredientItem key={ingredient.name} ingredient={ingredient} 
+              isSelected={selectedIngredient === ingredient.name} onSelect={onSelectIngredient}/>))}
           </div>
 
           {/* handle submit, disable submit button if loading */}

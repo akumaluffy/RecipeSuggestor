@@ -2,7 +2,8 @@ import { useState } from 'react';
 import type { Ingredient, Recipe, RecipeRequest } from '../types';
 import { InputForm } from '../components/InputForm';
 import { IngredientsList } from '../components/IngredientsList';
-import { RecipesDisplay } from '../components/RecipeDisplay.tsx';
+import { RecipesDisplay } from '../components/RecipeDisplay';
+import { FavoritesDisplay } from '../components/FavoritesDisplay';
 import { fetchRecipes } from '../services/api';
 import './RecipeFinderContainer.css';
 
@@ -11,19 +12,22 @@ export const RecipeFinderContainer = () => {
   
   const [ingredientsList, setIngredientsList] = useState<Ingredient[]>([]);
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
+  const [selectedFavorite, setSelectedFavorite] = useState<string | null>(null);
+  const [favorites, setFavorites] = useState<Recipe[]>([]);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // handlers for input (ingredient) form
   const handleInputChange = (value: string) => {
     setInputValue(value);
   };
+
 
   const handleAdd = () => {
     const value = inputValue.trim();
     if (value) {
       const newIngredient: Ingredient = {
-        id: `ingredient-${Date.now()}`,
         name: value,
       };
       setIngredientsList(prev => [...prev, newIngredient]);
@@ -31,9 +35,10 @@ export const RecipeFinderContainer = () => {
     }
   };
 
+  // handlers for ingredients list
   const handleRemove = () => {
     if (selectedIngredient) {
-      setIngredientsList(prev => prev.filter(ing => ing.id !== selectedIngredient));
+      setIngredientsList(prev => prev.filter(ing => ing.name !== selectedIngredient));
       setSelectedIngredient(null);
     }
   };
@@ -63,8 +68,35 @@ export const RecipeFinderContainer = () => {
     }
   };
 
+  // handler functions for favorites section
+  const handleSelectFavorite = (id: string) => {
+    setSelectedFavorite(prev => prev === id ? null : id);
+  };
+
+  const handleRemoveFavorite = () => {
+    if (selectedFavorite) {
+      setFavorites(prev => prev.filter(recipe => recipe.name !== selectedFavorite));
+      setSelectedFavorite(null);
+    }
+  }
+
+  const handleClearFavorites = () => {
+    setFavorites([]);
+    setSelectedFavorite(null);
+  }
+
   return (
     <>
+      <div className="recipe-finder-favorites-section">
+        <FavoritesDisplay 
+        recipes={favorites}
+        selectedFavorite={selectedFavorite}
+        isLoading={isLoading}
+        onSelectFavorite={handleSelectFavorite}
+        onRemove={handleRemoveFavorite}
+        onClear={handleClearFavorites}
+        />
+      </div>
       <div className="recipe-finder-inputs-section">
           <InputForm
             value={inputValue}

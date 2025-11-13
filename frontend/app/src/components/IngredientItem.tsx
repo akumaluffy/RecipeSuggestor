@@ -15,11 +15,12 @@ interface IngredientItemProps {
  * @param onSelect - property function for handling user item selection
  */
 export const IngredientItem: React.FC<IngredientItemProps> = 
-  ({ ingredient, isSelected, onSelect }) => {
+({ ingredient, isSelected, onSelect }) => 
+{
   return (
     // change class name if item selected to enable different css effects
     <div
-      onClick= {() => onSelect(ingredient.id)}
+      onClick= {() => onSelect(ingredient.name)}
       className= {`ingredient-item ${isSelected ? 'selected' : ''}`}>
       <div className="ingredient-item-content">
         <span className="ingredient-item-name">{ingredient.name}</span>

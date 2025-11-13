@@ -1,2 +1,4 @@
-Notes on choices made during dev process
-
+TODO:
+1. Be able to add selected recipes to database (favorited recipes) - don't include more users just have a "master" user
+    * include a clear button and delete button for the database recipes
+3. Add a show more recipes button
