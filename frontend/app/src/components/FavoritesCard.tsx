@@ -5,7 +5,7 @@ import './FavoritesCard.css';
 interface FavoritesCardProps {
     recipe: Recipe;
     isSelected: boolean;
-    onSelect: (id: string) => void; // property function to handle user selection
+    onSelect: (id: string) => void;
 }
 
 /**

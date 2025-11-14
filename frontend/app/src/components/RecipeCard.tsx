@@ -4,15 +4,19 @@ import './RecipeCard.css';
 // Props for each recipe card
 interface RecipeCardProps {
   recipe: Recipe;
+  isSelected: boolean;
+  onSelect: (id: string) => void;
 }
 
 /**
  * Card / container for each recipe including recipe name, description, ingredients, and instructions
  * @param recipe - recipe type containing all information pertaining to a recipe
  */
-export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
+export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, isSelected, onSelect }) => {
   return (
-    <div className="recipe-card">
+    <div 
+    onClick = {() => onSelect(recipe.name)}
+    className = {`recipe-card ${isSelected ? 'selected' : ''}`}>
       <h3 className="recipe-card-title">{recipe.name}</h3>
       <p className="recipe-card-description">{recipe.description}</p>
       

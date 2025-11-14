@@ -8,13 +8,18 @@ import { fetchRecipes } from '../services/api';
 import './RecipeFinderContainer.css';
 
 export const RecipeFinderContainer = () => {
+
   const [inputValue, setInputValue] = useState<string>('');
-  
+
   const [ingredientsList, setIngredientsList] = useState<Ingredient[]>([]);
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
-  const [selectedFavorite, setSelectedFavorite] = useState<string | null>(null);
-  const [favorites, setFavorites] = useState<Recipe[]>([]);
+
   const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [selectedRecipe, setSelectedRecipe] = useState<string | null>(null);
+
+  const [favorites, setFavorites] = useState<Recipe[]>([]);
+  const [selectedFavorite, setSelectedFavorite] = useState<string | null>(null);
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -67,6 +72,23 @@ export const RecipeFinderContainer = () => {
       setIsLoading(false);
     }
   };
+  
+  const handleSelectRecipe = (id: string) => {
+    setSelectedRecipe(prev => prev === id ? null : id);
+  }
+
+  const handleFavorite = () => {
+    if (selectedRecipe) {
+      // Find the selected recipe object from the current recipes list
+      const recipeToFavorite = recipes.find(recipe => recipe.name === selectedRecipe);
+      if (recipeToFavorite) {
+        setFavorites(prev => {
+          const alreadyFavorited = prev.some(r => r.name === recipeToFavorite.name);
+          return alreadyFavorited ? prev : [...prev, recipeToFavorite];
+        });
+      }
+    }
+  }
 
   // handler functions for favorites section
   const handleSelectFavorite = (id: string) => {
@@ -87,16 +109,6 @@ export const RecipeFinderContainer = () => {
 
   return (
     <>
-      <div className="recipe-finder-favorites-section">
-        <FavoritesDisplay 
-        recipes={favorites}
-        selectedFavorite={selectedFavorite}
-        isLoading={isLoading}
-        onSelectFavorite={handleSelectFavorite}
-        onRemove={handleRemoveFavorite}
-        onClear={handleClearFavorites}
-        />
-      </div>
       <div className="recipe-finder-inputs-section">
           <InputForm
             value={inputValue}
@@ -128,7 +140,25 @@ export const RecipeFinderContainer = () => {
         </div>
       )}
 
-      {!isLoading && !error && <RecipesDisplay recipes={recipes} />}
+      {!isLoading && !error && 
+      <RecipesDisplay 
+        recipes={recipes} 
+        selectedRecipe={selectedRecipe}
+        isLoading={isLoading}
+        onSelectRecipe={handleSelectRecipe}
+        onFavorite={handleFavorite}
+      />}
+
+      <div className="recipe-finder-favorites-section">
+        <FavoritesDisplay 
+        recipes={favorites}
+        selectedFavorite={selectedFavorite}
+        isLoading={isLoading}
+        onSelectFavorite={handleSelectFavorite}
+        onRemove={handleRemoveFavorite}
+        onClear={handleClearFavorites}
+        />
+      </div>
     </>
   );
 };

@@ -1,15 +1,3 @@
-.recipe-finder-favorites-section {
-  margin-bottom: 2rem;
-}
-
-/* .recipe-finder-inputs-section {
-  grid-column: span 1;
-  background-color: white;
-  border-radius: 0.75rem;
-  border: 1px solid #d1d5db;
-  margin-bottom: 2rem;
-} */
-
 .loading-message {
   display: flex;
   flex-direction: column;

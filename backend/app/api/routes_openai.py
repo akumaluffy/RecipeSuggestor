@@ -22,14 +22,14 @@ router = APIRouter()
 '''
 @router.post("/generate_text", response_model=List[RecipeResponse])
 async def generate_text(request: RecipeRequest):
-    prompt = f"""I need recipe ideas using the ingredients that I currently have on hand. Could you give me 4 recipe suggestions using the following ingredients: {', '.join(request.ingredients)}?
+    prompt = f"""I need recipe ideas using the ingredients that I currently have on hand. Could you give me 4 recipe suggestions using the following ingredients: {', '.join(request.ingredients)}? If any ingredients given in the list are not food items or cooking ingredients, make sure to exclude them when searching for recipes.
     
     Format the response as a JSON array of recipes, where each recipe has:
     - name: string
     - description: string
     - ingredients: array of strings
     - instructions: array of strings
-    
+
     Return only valid JSON, no other text, and do not wrap the JSON response in markdown code blocks."""
 
     try:

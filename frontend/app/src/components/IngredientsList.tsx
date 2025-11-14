@@ -22,7 +22,8 @@ interface IngredientsListProps {
 }
 
 export const IngredientsList: React.FC<IngredientsListProps> = 
-  ({ ingredients, selectedIngredient, isLoading, onSelectIngredient, onRemove, onSubmit }) => {
+({ ingredients, selectedIngredient, isLoading, onSelectIngredient, onRemove, onSubmit }) => 
+{
   return (
     <div className="ingredients-list-container">
       <h2 className="ingredients-list-title">Your Ingredients</h2>
