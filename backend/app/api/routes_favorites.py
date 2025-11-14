@@ -25,3 +25,24 @@ async def add_favorite_recipe(recipe: RecipeResponse):
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to add favorite: {str(e)}")
+
+@router.delete("/{recipe_name}")
+async def remove_favorite_recipe(recipe_name: str):
+    try:
+        success = remove_favorite(recipe_name)
+        if not success:
+            raise HTTPException(status_code=400, detail="recipe not found in favorites")
+        return {"message": "Recipe removed from favorites"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to remove favorite: {str(e)}")
+
+@router.delete("/")
+async def clear_favorites():
+    """Clear all favorites"""
+    try:
+        count = clear_all_favorites()
+        return {"message": f"Cleared {count} favorite(s)"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to clear favorites: {str(e)}")
