@@ -1,19 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from app.services.openai_service import get_openai_response
-from pydantic import BaseModel
+from app.models import RecipeRequest, RecipeResponse
 from typing import List
 import json
-
-# structure of each request object, ensures request includes list of ingredients
-class RecipeRequest(BaseModel):
-    ingredients: List[str]
-
-# structure of each recipe object returned by endpoint
-class RecipeResponse(BaseModel):
-    name: str
-    description: str
-    ingredients: List[str]
-    instructions: List[str]
 
 router = APIRouter()
 

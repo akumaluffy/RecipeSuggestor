@@ -1,7 +1,6 @@
 from openai import AsyncOpenAI
 import os, sys
 from dotenv import load_dotenv
-import sqlite3
 
 load_dotenv()
 
