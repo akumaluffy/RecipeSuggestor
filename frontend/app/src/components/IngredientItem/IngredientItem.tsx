@@ -1,4 +1,4 @@
-import type { Ingredient } from '../types';
+import type { Ingredient } from '../../types';
 import './IngredientItem.css';
 
 // Props for each ingredient item

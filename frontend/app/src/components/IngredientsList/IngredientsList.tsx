@@ -1,6 +1,6 @@
 import React from 'react';
-import type { Ingredient } from '../types';
-import { IngredientItem } from './IngredientItem';
+import type { Ingredient } from '../../types';
+import { IngredientItem } from '../IngredientItem';
 import './IngredientsList.css';
 
 /**

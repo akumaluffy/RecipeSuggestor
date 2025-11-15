@@ -1,6 +1,6 @@
-import type { Recipe } from '../types';
-import { RecipeCard } from './RecipeCard';
-import './RecipeDisplay.css';
+import type { Recipe } from '../../types';
+import { RecipeCard } from '../RecipeCard';
+import './RecipesDisplay.css';
 
 // Props for recipes display
 interface RecipesDisplayProps {

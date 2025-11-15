@@ -1,0 +1,1 @@
+export { FavoritesDisplay } from './FavoritesDisplay';

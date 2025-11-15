@@ -1,4 +1,4 @@
-import type { Recipe } from '../types';
+import type { Recipe } from '../../types';
 import './FavoritesCard.css';
 
 // Props for each favorites card

@@ -1,7 +1,7 @@
 // import { useState } from 'react'
 import './App.css';
-import { Header } from './components/Header.tsx';
-import { RecipeFinderContainer } from './containers/RecipeFinderContainer.tsx';
+import { Header } from './components/Header';
+import { RecipeFinderContainer } from './containers/RecipeFinderContainer';
 
 function App() {
   return (

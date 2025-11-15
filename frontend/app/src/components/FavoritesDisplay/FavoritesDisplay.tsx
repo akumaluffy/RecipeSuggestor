@@ -1,5 +1,5 @@
-import type { Recipe } from '../types';
-import { FavoritesCard } from './FavoritesCard';
+import type { Recipe } from '../../types';
+import { FavoritesCard } from '../FavoritesCard';
 import './FavoritesDisplay.css';
 
 interface FavoritesDisplayProps {
