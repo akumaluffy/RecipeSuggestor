@@ -10,7 +10,7 @@ app = FastAPI()
 # initialize database on startup
 @app.on_event("startup")
 async def startup_event():
-    init_database
+    init_database()
 
 
 # CORS so React frontend can call the API

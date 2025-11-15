@@ -1,11 +1,11 @@
 from fastapi import APIRouter, HTTPException
-from app.services.favorites_database import (get_all_favorites, add_favorite, remove_favorite, clear_all_favorites)
+from app.services.favorites_database import (get_all_favorites, add_favorite, remove_favorites, clear_all_favorites)
 from app.models import RecipeResponse
 from typing import List
 
 router = APIRouter()
 
-@router.get("/", response_model=List(RecipeResponse))
+@router.get("/", response_model=List[RecipeResponse])
 async def get_favorites():
     try:
         favorites = get_all_favorites()
@@ -29,7 +29,7 @@ async def add_favorite_recipe(recipe: RecipeResponse):
 @router.delete("/{recipe_name}")
 async def remove_favorite_recipe(recipe_name: str):
     try:
-        success = remove_favorite(recipe_name)
+        success = remove_favorites(recipe_name)
         if not success:
             raise HTTPException(status_code=400, detail="recipe not found in favorites")
         return {"message": "Recipe removed from favorites"}

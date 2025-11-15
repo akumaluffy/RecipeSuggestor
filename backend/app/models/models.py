@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import List
 
 class RecipeRequest(BaseModel):
-    ingerdients: List[str]
+    ingredients: List[str]
 
 class RecipeResponse(BaseModel):
     name: str

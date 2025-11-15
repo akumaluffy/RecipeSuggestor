@@ -1,5 +1,6 @@
 import sqlite3
 import json
+import os
 from typing import List, Optional, Dict, Any
 
 # Database file path - adjust based on where the script is run from
@@ -74,7 +75,7 @@ def remove_favorites(recipe_name: str) -> bool:
     con = sqlite3.connect(DB_PATH)
     cur = con.cursor()
 
-    cur.execute("DELETE FROM favorites WHERE name = ?", (recipe_name))
+    cur.execute("DELETE FROM favorites WHERE name = ?", (recipe_name,))
     deleted = cur.rowcount > 0 # cur.rowcount returns number of rows deleted by last execute call, > 0 confirms successful deletion
     con.commit()
     con.close()
