@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Ingredient, Recipe, RecipeRequest } from '../types';
 import { InputForm } from '../components/InputForm';
 import { IngredientsList } from '../components/IngredientsList';
 import { RecipesDisplay } from '../components/RecipeDisplay';
 import { FavoritesDisplay } from '../components/FavoritesDisplay';
-import { fetchRecipes } from '../services/api';
+import { fetchRecipes, fetchFavorites, addFavorite, removeFavorite, clearFavorites } from '../services/api';
 import './RecipeFinderContainer.css';
 
 export const RecipeFinderContainer = () => {
@@ -23,13 +23,25 @@ export const RecipeFinderContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => {
+    const loadFavorites = async() => {
+      try {
+        const favoritesData = await fetchFavorites();
+        setFavorites(favoritesData);
+      } catch (error) {
+        console.error('Error loading favorites: ', error);
+      }
+    };
+    loadFavorites();
+  }, []); // ensures loading only occurs once
+
+
   // handlers for input (ingredient) form
   const handleInputChange = (value: string) => {
     setInputValue(value);
   };
 
-
-  const handleAdd = () => {
+  const handleAddIngredient = () => {
     const value = inputValue.trim();
     if (value) {
       const newIngredient: Ingredient = {
@@ -41,7 +53,7 @@ export const RecipeFinderContainer = () => {
   };
 
   // handlers for ingredients list
-  const handleRemove = () => {
+  const handleRemoveIngredient = () => {
     if (selectedIngredient) {
       setIngredientsList(prev => prev.filter(ing => ing.name !== selectedIngredient));
       setSelectedIngredient(null);
@@ -66,7 +78,7 @@ export const RecipeFinderContainer = () => {
       
       setRecipes(recipesData);
     } catch (error) {
-      console.error('Error fetching recipes:', error);
+      console.error('Error fetching recipes: ', error);
       setError(error instanceof Error ? error.message : 'Failed to fetch recipes');
     } finally {
       setIsLoading(false);
@@ -77,15 +89,24 @@ export const RecipeFinderContainer = () => {
     setSelectedRecipe(prev => prev === id ? null : id);
   }
 
-  const handleFavorite = () => {
+  const handleFavorite = async () => {
     if (selectedRecipe) {
-      // Find the selected recipe object from the current recipes list
+      // find the selected recipe object from the current recipes list
       const recipeToFavorite = recipes.find(recipe => recipe.name === selectedRecipe);
       if (recipeToFavorite) {
-        setFavorites(prev => {
-          const alreadyFavorited = prev.some(r => r.name === recipeToFavorite.name);
-          return alreadyFavorited ? prev : [...prev, recipeToFavorite];
-        });
+        const alreadyFavorited = favorites.some(recipe => recipe.name === recipeToFavorite.name);
+        if (!alreadyFavorited) {
+          try {
+            setIsLoading(true);
+            await addFavorite(recipeToFavorite);
+            setFavorites(prev => [...prev, recipeToFavorite]);
+          } catch (error) {
+            console.error('Error adding favorite: ', error);
+            setError(error instanceof Error ? error.message : 'Failed to add favorite');
+          } finally {
+            setIsLoading(false);
+          }
+        }
       }
     }
   }
@@ -95,16 +116,34 @@ export const RecipeFinderContainer = () => {
     setSelectedFavorite(prev => prev === id ? null : id);
   };
 
-  const handleRemoveFavorite = () => {
+  const handleRemoveFavorite = async () => {
     if (selectedFavorite) {
-      setFavorites(prev => prev.filter(recipe => recipe.name !== selectedFavorite));
-      setSelectedFavorite(null);
+      try {
+        setIsLoading(true);
+        await removeFavorite(selectedFavorite);
+        setFavorites(prev => prev.filter(recipe => recipe.name !== selectedFavorite));
+        setSelectedFavorite(null); // undo select after adding
+      } catch (error) {
+        console.error('Error removing favorite: ', error);
+        setError(error instanceof Error ? error.message : 'Failed to remove favorite');
+      } finally {
+        setIsLoading(false);
+      }
     }
   }
 
-  const handleClearFavorites = () => {
-    setFavorites([]);
-    setSelectedFavorite(null);
+  const handleClearFavorites = async () => {
+    try {
+      setIsLoading(true);
+      await clearFavorites();
+      setFavorites([]);
+      setSelectedFavorite(null);
+    } catch (error) {
+      console.error('Error clearing favorites: ', error);
+      setError(error instanceof Error ? error.message : 'Failed to clear favorites ');
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -113,7 +152,7 @@ export const RecipeFinderContainer = () => {
           <InputForm
             value={inputValue}
             onChange={handleInputChange}
-            onAdd={handleAdd}
+            onAdd={handleAddIngredient}
           />
       </div>
       <div className="recipe-finder-ingredients-section">
@@ -122,7 +161,7 @@ export const RecipeFinderContainer = () => {
             selectedIngredient={selectedIngredient}
             isLoading={isLoading}
             onSelectIngredient={handleSelectIngredient}
-            onRemove={handleRemove}
+            onRemove={handleRemoveIngredient}
             onSubmit={handleSubmit}
           />
       </div>
