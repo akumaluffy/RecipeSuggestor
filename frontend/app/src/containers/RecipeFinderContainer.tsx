@@ -9,17 +9,22 @@ import './RecipeFinderContainer.css';
 
 export const RecipeFinderContainer = () => {
 
+  // user ingredient input value variable
   const [inputValue, setInputValue] = useState<string>('');
 
+  // ingredients list and selected ingredient variables
   const [ingredientsList, setIngredientsList] = useState<Ingredient[]>([]);
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
 
+  // recipes list and selected recipe variables
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [selectedRecipe, setSelectedRecipe] = useState<string | null>(null);
 
-  const [favorites, setFavorites] = useState<Recipe[]>([]);
+  // favorites Recipe list and selected favorite variables
+  const [favorites, setFavorites] = useState<Recipe[]>([]); // locally cache recipes found within favorites for faster loading after initial fetch
   const [selectedFavorite, setSelectedFavorite] = useState<string | null>(null);
 
+  // load state and error state variables
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -37,10 +42,12 @@ export const RecipeFinderContainer = () => {
 
 
   // handlers for input (ingredient) form
+  // handles user input (ingredient) value changes
   const handleInputChange = (value: string) => {
     setInputValue(value);
   };
 
+  // adds ingredients from input form to ingredients list 
   const handleAddIngredient = () => {
     const addIngredient = inputValue.trim();
     if (addIngredient) {
@@ -56,6 +63,8 @@ export const RecipeFinderContainer = () => {
   };
 
   // handlers for ingredients list
+
+  // removes ingredients from ingredients list and updates ingredients list
   const handleRemoveIngredient = () => {
     if (selectedIngredient) {
       setIngredientsList(prev => prev.filter(ing => ing.name !== selectedIngredient));
@@ -63,10 +72,12 @@ export const RecipeFinderContainer = () => {
     }
   };
 
+  // handler for selected ingredient
   const handleSelectIngredient = (id: string) => {
     setSelectedIngredient(prev => prev === id ? null : id);
   };
 
+  // submits ingredients to send as prompt for openai api call
   const handleSubmit = async () => {
     if (ingredientsList.length === 0) return;
     
@@ -84,14 +95,16 @@ export const RecipeFinderContainer = () => {
       console.error('Error fetching recipes: ', error);
       setError(error instanceof Error ? error.message : 'Failed to fetch recipes');
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // update loading state to false after submission is complete
     }
   };
   
+  // handles user recipe selection
   const handleSelectRecipe = (id: string) => {
     setSelectedRecipe(prev => prev === id ? null : id);
   }
 
+  // adds selected recipe from recipes list to favorites
   const handleFavorite = async () => {
     if (selectedRecipe) {
       // find the selected recipe object from the current recipes list
@@ -115,10 +128,12 @@ export const RecipeFinderContainer = () => {
   }
 
   // handler functions for favorites section
+  // handles user selection of favorited recipe
   const handleSelectFavorite = (id: string) => {
     setSelectedFavorite(prev => prev === id ? null : id);
   };
 
+  // removes selected recipe from favorites list
   const handleRemoveFavorite = async () => {
     if (selectedFavorite) {
       try {
@@ -135,6 +150,7 @@ export const RecipeFinderContainer = () => {
     }
   }
 
+  // clears all recipes from favorites list
   const handleClearFavorites = async () => {
     try {
       setIsLoading(true);

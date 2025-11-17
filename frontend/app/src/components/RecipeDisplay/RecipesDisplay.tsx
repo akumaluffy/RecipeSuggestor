@@ -14,6 +14,10 @@ interface RecipesDisplayProps {
 /**
  * Container for recipes, comprised of recipe cards
  * @param recipes - array of Recipe objects (types)
+ * @param selectedRecipe - recipe that has been selected
+ * @param isLoading - load state handling to prevent additional user actions
+ * @param onSelectRecipe - property function for handling user recipe selection
+ * @param onFavorite - button function for adding selected recipe to favorites
  */
 export const RecipesDisplay: React.FC<RecipesDisplayProps> = 
 ({ recipes, selectedRecipe, isLoading, onSelectRecipe, onFavorite}) => 

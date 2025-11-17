@@ -11,8 +11,12 @@ interface RecipeCardProps {
 /**
  * Card / container for each recipe including recipe name, description, ingredients, and instructions
  * @param recipe - recipe type containing all information pertaining to a recipe
+ * @param isSelected - use state if recipe has been selected
+ * @param onSelect - property function for handling user selection
  */
-export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, isSelected, onSelect }) => {
+export const RecipeCard: React.FC<RecipeCardProps> = 
+({ recipe, isSelected, onSelect }) => 
+{
   return (
     <div 
     onClick = {() => onSelect(recipe.name)}

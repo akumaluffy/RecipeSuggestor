@@ -11,6 +11,15 @@ interface FavoritesDisplayProps {
     onClear: () => void;
 }
 
+/**
+ * container for displaying favorited recipes
+ * @param recipes - list of Recipe types
+ * @param selectedFavorite - favorited recipe that has been selected
+ * @param isLoading - load state handling to prevent additional user actions
+ * @param onSelectFavorite - property function for handling user selection
+ * @param onRemove - button function for handling removal of favorited recipes
+ * @param onClear - button function for clearing all favorites from list
+ */
 export const FavoritesDisplay: React.FC<FavoritesDisplayProps> = 
 ({ recipes, selectedFavorite, isLoading, onSelectFavorite, onRemove, onClear}) => 
 {

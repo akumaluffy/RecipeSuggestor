@@ -1,7 +1,6 @@
 import type { Recipe } from '../../types';
 import './FavoritesCard.css';
 
-// Props for each favorites card
 interface FavoritesCardProps {
     recipe: Recipe;
     isSelected: boolean;
@@ -9,8 +8,10 @@ interface FavoritesCardProps {
 }
 
 /**
- * Card / container for each recipe including recipe name, description, ingredients, and instructions
+ * card / container for each recipe including recipe name, description, ingredients, and instructions
  * @param recipe - recipe type containing all info pertaining to a recipe
+ * @param isSelected - use state for if a favorited recipe has been selected
+ * @param onSelect - property function to handle user selection
  */
 export const FavoritesCard: React.FC<FavoritesCardProps> = 
 ({ recipe, isSelected, onSelect }) => 

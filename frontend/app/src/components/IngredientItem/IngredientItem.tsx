@@ -1,11 +1,10 @@
 import type { Ingredient } from '../../types';
 import './IngredientItem.css';
 
-// Props for each ingredient item
 interface IngredientItemProps {
-  ingredient: Ingredient; // ingredient item
-  isSelected: boolean; // did user select item
-  onSelect: (id: string) => void; // property function for handling user item selection
+  ingredient: Ingredient;
+  isSelected: boolean;
+  onSelect: (id: string) => void;
 }
 
 /**

@@ -6,11 +6,15 @@ interface InputFormProps {
   onAdd: () => void;
 }
 
+/**
+ * container for ingredients input form
+ * @param value - ingredient string
+ * @param onChange - handles value changes
+ * @param onAdd - button function for adding ingredients to the ingredients list
+ */
 export const InputForm: React.FC<InputFormProps> = ({
-  value,
-  onChange,
-  onAdd
-}) => {
+value, onChange, onAdd }) => 
+{
   // handles user pressing enter
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
@@ -26,7 +30,7 @@ export const InputForm: React.FC<InputFormProps> = ({
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
           placeholder={`Enter an ingredient...`}
           className="input-form-field"
         />

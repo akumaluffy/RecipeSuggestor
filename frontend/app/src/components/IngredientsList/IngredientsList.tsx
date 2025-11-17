@@ -3,15 +3,6 @@ import type { Ingredient } from '../../types';
 import { IngredientItem } from '../IngredientItem';
 import './IngredientsList.css';
 
-/**
- * Props for ingredients list component
- * ingredients - list of ingredients in the list
- * selectedIngredient - ingredient that has been selected
- * isLoading - ingredients load state
- * onSelectIngredient - property function for handling user ingredient select
- * onRemove - button function for remove
- * onSubmit - buttion function for submit
- */
 interface IngredientsListProps {
   ingredients: Ingredient[];
   selectedIngredient: string | null;
@@ -21,6 +12,15 @@ interface IngredientsListProps {
   onSubmit: () => void; 
 }
 
+/**
+ * container for list of ingredients added by user
+ * @param ingredients - list of ingredients in the list
+ * @param selectedIngredient - ingredient that has been selected
+ * @param isLoading - load state handling to prevent additional user actions
+ * @param onSelectIngredient - property function for handling user ingredient select
+ * @param onRemove - button function for remove
+ * @param onSubmit - buttion function for sending ingredients to ai
+ */
 export const IngredientsList: React.FC<IngredientsListProps> = 
 ({ ingredients, selectedIngredient, isLoading, onSelectIngredient, onRemove, onSubmit }) => 
 {

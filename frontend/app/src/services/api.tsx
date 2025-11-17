@@ -2,7 +2,11 @@ import type { RecipeRequest, Recipe } from '../types';
 
 const API_BASE_URL = "http://localhost:8000"
 
-// use RecipeRequest type for input parameter
+/**
+ * service function for making api call to openai api
+ * @param recipeRequest - RecipeRequest type, contains list of ingredient strings
+ * @return - returns list of Recipe types from llm response
+ */
 export const fetchRecipes = async (recipeRequest: RecipeRequest): Promise<Recipe[]> => {
   const response = await fetch(`${API_BASE_URL}/api/openai/generate_text`, {
     method: 'POST',
@@ -22,8 +26,10 @@ export const fetchRecipes = async (recipeRequest: RecipeRequest): Promise<Recipe
 }
 
 // favorites API functions
+
 /**
- * Loads 
+ * service function to get list of recipes from favorites database
+ * @return - list of Recipe types contained within the favorites database
  */
 export const fetchFavorites = async (): Promise<Recipe[]> => {
   const response = await fetch(`${API_BASE_URL}/api/favorites/`, {
@@ -42,6 +48,9 @@ export const fetchFavorites = async (): Promise<Recipe[]> => {
   return data
 }
 
+/**
+ * adds user selected recipe to the favorites database
+ */
 export const addFavorite = async (recipe: Recipe): Promise<Recipe> => {
   const response = await fetch(`${API_BASE_URL}/api/favorites/`, {
     method: 'POST',
@@ -58,6 +67,9 @@ export const addFavorite = async (recipe: Recipe): Promise<Recipe> => {
   return await response.json();
 }
 
+/**
+ * removes user selected recipe from favorites database
+ */
 export const removeFavorite = async (recipeName: string): Promise<void> => {
   const response = await fetch(`${API_BASE_URL}/api/favorites/${encodeURIComponent(recipeName)}`, {
     method: 'DELETE',
@@ -71,6 +83,9 @@ export const removeFavorite = async (recipeName: string): Promise<void> => {
   }
 }
 
+/**
+ * clears all recipes found within favorites database
+ */
 export const clearFavorites = async (): Promise<void> => {
   const response = await fetch(`${API_BASE_URL}/api/favorites/`, {
     method: 'DELETE',
