@@ -7,7 +7,9 @@ import json
 router = APIRouter()
 
 '''
-
+Router for openai api call. Passes a list of ingredients into pre-engineered prompt for openai llm response. 
+@param request - RecipeRequest model
+@return - list of recipes following the RecipeResponse model
 '''
 @router.post("/generate_text", response_model=List[RecipeResponse])
 async def generate_text(request: RecipeRequest):

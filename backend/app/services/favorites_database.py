@@ -6,6 +6,7 @@ from typing import List, Optional, Dict, Any
 # Database file path - adjust based on where the script is run from
 DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "app", "database.db")
 
+# handles initialization of database if database does not exist
 async def init_database():
     con = sqlite3.connect(DB_PATH)
     cur = con.cursor()
@@ -22,6 +23,7 @@ async def init_database():
     con.commit()
     con.close()
 
+# accesses database and returns list of recipes
 async def get_all_favorites() -> List[Dict[str, Any]]:
     con = sqlite3.connect(DB_PATH)
     cur = con.cursor()
@@ -41,6 +43,7 @@ async def get_all_favorites() -> List[Dict[str, Any]]:
     con.close()
     return favorites
 
+# handles adding recipes to dictionary, returns true on successful addition
 async def add_favorite(recipe_data: Dict[str, Any]) -> bool:
     con = sqlite3.connect(DB_PATH)
     cur = con.cursor()
@@ -71,6 +74,7 @@ async def add_favorite(recipe_data: Dict[str, Any]) -> bool:
         con.close()
         raise e
 
+# removes selected favorite from recipe based on recipe_name 
 async def remove_favorites(recipe_name: str) -> bool:
     con = sqlite3.connect(DB_PATH)
     cur = con.cursor()
@@ -81,6 +85,7 @@ async def remove_favorites(recipe_name: str) -> bool:
     con.close()
     return deleted
 
+# clears all favorited recipes from database
 async def clear_all_favorites() -> int:
     con = sqlite3.connect(DB_PATH)
     cur = con.cursor()

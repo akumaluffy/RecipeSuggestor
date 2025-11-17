@@ -5,6 +5,9 @@ from typing import List
 
 router = APIRouter()
 
+'''
+Routers for favorites database
+'''
 @router.get("/", response_model=List[RecipeResponse])
 async def get_favorites():
     try:
