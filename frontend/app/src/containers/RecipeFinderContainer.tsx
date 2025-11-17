@@ -42,13 +42,16 @@ export const RecipeFinderContainer = () => {
   };
 
   const handleAddIngredient = () => {
-    const value = inputValue.trim();
-    if (value) {
-      const newIngredient: Ingredient = {
-        name: value,
-      };
-      setIngredientsList(prev => [...prev, newIngredient]);
-      setInputValue('');
+    const addIngredient = inputValue.trim();
+    if (addIngredient) {
+      const alreadyAdded = ingredientsList.some(ing => ing.name === addIngredient)
+      if (!alreadyAdded) {
+        const newIngredient: Ingredient = {
+          name: addIngredient,
+        };
+        setIngredientsList(prev => [...prev, newIngredient]);
+        setInputValue('');
+      }
     }
   };
 

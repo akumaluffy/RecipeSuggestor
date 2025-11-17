@@ -80,6 +80,6 @@ export const clearFavorites = async (): Promise<void> => {
 });
 
   if (!response.ok) {
-    throw new Error(`Failed to clear favorites: $(response.statusText)`);
+    throw new Error(`Failed to clear favorites: ${response.statusText}`);
   }
 }

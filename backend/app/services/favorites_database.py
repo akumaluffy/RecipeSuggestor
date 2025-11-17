@@ -6,7 +6,7 @@ from typing import List, Optional, Dict, Any
 # Database file path - adjust based on where the script is run from
 DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "app", "database.db")
 
-def init_database():
+async def init_database():
     con = sqlite3.connect(DB_PATH)
     cur = con.cursor()
 
@@ -22,7 +22,7 @@ def init_database():
     con.commit()
     con.close()
 
-def get_all_favorites() -> List[Dict[str, Any]]:
+async def get_all_favorites() -> List[Dict[str, Any]]:
     con = sqlite3.connect(DB_PATH)
     cur = con.cursor()
 
@@ -41,7 +41,7 @@ def get_all_favorites() -> List[Dict[str, Any]]:
     con.close()
     return favorites
 
-def add_favorite(recipe_data: Dict[str, Any]) -> bool:
+async def add_favorite(recipe_data: Dict[str, Any]) -> bool:
     con = sqlite3.connect(DB_PATH)
     cur = con.cursor()
 
@@ -71,7 +71,7 @@ def add_favorite(recipe_data: Dict[str, Any]) -> bool:
         con.close()
         raise e
 
-def remove_favorites(recipe_name: str) -> bool:
+async def remove_favorites(recipe_name: str) -> bool:
     con = sqlite3.connect(DB_PATH)
     cur = con.cursor()
 
@@ -81,7 +81,7 @@ def remove_favorites(recipe_name: str) -> bool:
     con.close()
     return deleted
 
-def clear_all_favorites() -> int:
+async def clear_all_favorites() -> int:
     con = sqlite3.connect(DB_PATH)
     cur = con.cursor()
 

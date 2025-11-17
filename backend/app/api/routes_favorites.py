@@ -8,7 +8,7 @@ router = APIRouter()
 @router.get("/", response_model=List[RecipeResponse])
 async def get_favorites():
     try:
-        favorites = get_all_favorites()
+        favorites = await get_all_favorites()
         return [RecipeResponse(**fav) for fav in favorites]
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch favorites: {str(e)}")
@@ -17,7 +17,7 @@ async def get_favorites():
 async def add_favorite_recipe(recipe: RecipeResponse): 
     try:
         recipe_dict = recipe.dict()
-        success = add_favorite(recipe_dict)
+        success = await add_favorite(recipe_dict)
         if not success:
             raise HTTPException(status_code=400, details="Recipe already in favorites")
         return recipe
@@ -29,7 +29,7 @@ async def add_favorite_recipe(recipe: RecipeResponse):
 @router.delete("/{recipe_name}")
 async def remove_favorite_recipe(recipe_name: str):
     try:
-        success = remove_favorites(recipe_name)
+        success = await remove_favorites(recipe_name)
         if not success:
             raise HTTPException(status_code=400, detail="recipe not found in favorites")
         return {"message": "Recipe removed from favorites"}
@@ -42,7 +42,7 @@ async def remove_favorite_recipe(recipe_name: str):
 async def clear_favorites():
     """Clear all favorites"""
     try:
-        count = clear_all_favorites()
+        count = await clear_all_favorites()
         return {"message": f"Cleared {count} favorite(s)"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to clear favorites: {str(e)}")
