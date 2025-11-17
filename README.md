@@ -48,7 +48,7 @@ A webapp that uses AI to generate recipe suggestions based on ingredients that t
 
 ### Frontend
 
-1. Navigate to frontend directory
+1. Navigate to frontend/app directory
 2. Install dependencies:
     - npm install
 
