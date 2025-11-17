@@ -1,1 +1,0 @@
-Normally I would add database.db file to gitignore and include path to it within the .env file
